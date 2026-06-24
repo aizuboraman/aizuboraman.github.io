@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AIズボラマン｜面倒くさいは、AIにやらせろ</title>
+<meta name="description" content="努力しない、頑張らない、無理しない。面倒なことは全部AIに丸投げして、ラクして結果を出すための場所。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Mochiy+Pop+One&family=Zen+Maru+Gothic:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#241f19;
+    --paper:#f1ead9;
+    --card:#fbf8f1;
+    --red:#d6403a;
+    --blue:#3e6b92;
+    --green:#5b8c5a;
+    --purple:#7a6ba8;
+    --mustard:#e0a23b;
+    --line-green:#06c755;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    font-family:"Zen Maru Gothic",system-ui,sans-serif;
+    color:var(--ink);
+    background-color:var(--paper);
+    background-image:radial-gradient(rgba(36,31,25,.05) 1.1px, transparent 1.2px);
+    background-size:14px 14px;
+    line-height:1.75;
+    padding-bottom:70px;
+  }
+  .wrap{max-width:680px;margin:0 auto;padding:0 16px}
+
+  /* hero: header band + overlapping avatar */
+  .hero{position:relative;margin-top:18px}
+  .banner{
+    width:100%;aspect-ratio:3/1;object-fit:cover;display:block;
+    border:3px solid var(--ink);border-radius:18px;
+    box-shadow:5px 5px 0 var(--ink);background:var(--card);
+  }
+  .avatar-row{margin:-46px 0 0 6px;position:relative}
+  .avatar{
+    width:104px;height:104px;border-radius:50%;object-fit:cover;
+    border:4px solid var(--ink);box-shadow:3px 3px 0 var(--ink);
+    background:var(--card);display:block;
+  }
+  .id{margin-top:12px}
+  .id h1{
+    font-family:"Mochiy Pop One",sans-serif;font-weight:400;
+    font-size:clamp(24px,6vw,34px);line-height:1.15;
+  }
+  .handle{font-size:13.5px;color:#7a6f5e;font-weight:700;margin-top:2px}
+
+  .tagline{
+    margin:20px 0 0;font-family:"Mochiy Pop One",sans-serif;
+    font-size:clamp(17px,4.4vw,22px);line-height:1.5;
+  }
+  .tagline .hl{
+    background:linear-gradient(transparent 62%, var(--mustard) 62%);
+    padding:0 2px;
+  }
+  .bio{margin:16px 0 0;font-size:15.5px;color:#4a4236}
+  .bio b{color:var(--ink)}
+
+  /* CTA */
+  .cta-zone{margin:30px 0 0;display:flex;flex-direction:column;gap:13px}
+  .btn{
+    display:flex;align-items:center;justify-content:center;gap:10px;
+    font-family:"Zen Maru Gothic",sans-serif;font-weight:700;font-size:17px;
+    text-decoration:none;color:var(--ink);
+    border:3px solid var(--ink);border-radius:14px;
+    box-shadow:4px 4px 0 var(--ink);padding:16px 18px;
+    transition:transform .1s ease, box-shadow .1s ease;
+  }
+  .btn:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--ink)}
+  .btn:active{transform:translate(2px,2px);box-shadow:1px 1px 0 var(--ink)}
+  .btn-line{background:var(--line-green);color:#fff}
+  .btn-line .sub{font-size:12px;font-weight:500;opacity:.92}
+  .btn-gift{background:var(--mustard)}
+  .btn .ico{font-size:21px;line-height:1}
+  .btn .label{display:flex;flex-direction:column;line-height:1.3;text-align:left}
+  .btn:focus-visible{outline:3px solid var(--blue);outline-offset:3px}
+
+  /* gift showcase */
+  .gift-top{display:flex;gap:14px;align-items:flex-start;margin-bottom:14px}
+  .gift-ico{font-size:34px;line-height:1;flex:none}
+  .gift-title{font-family:"Mochiy Pop One",sans-serif;font-size:18px}
+  .gift-note{font-size:14px;color:#6c6253;margin-top:3px}
+  .gift-list{margin:0 0 18px;padding:0}
+  .gift-list li{
+    list-style:none;font-size:14.5px;padding:7px 0 7px 26px;position:relative;
+  }
+  .gift-list li::before{
+    content:"✓";position:absolute;left:2px;color:var(--green);font-weight:700;
+  }
+  .gift-list li+li{border-top:2px dashed rgba(36,31,25,.16)}
+  .gift-cta{font-size:16px}
+
+  /* sections */
+  section{margin-top:46px}
+  .sec-head{
+    display:flex;align-items:center;gap:11px;margin-bottom:18px;
+    font-family:"Mochiy Pop One",sans-serif;font-size:19px;
+  }
+  .sec-head .bar{width:13px;height:26px;border-radius:5px;border:2.5px solid var(--ink)}
+
+  .panel{
+    background:var(--card);border:2.5px solid var(--ink);border-radius:16px;
+    box-shadow:4px 4px 0 var(--ink);padding:20px;
+  }
+
+  /* what list */
+  .what li{
+    list-style:none;display:flex;gap:11px;align-items:flex-start;
+    padding:9px 0;font-size:15.5px;
+  }
+  .what li+li{border-top:2px dashed rgba(36,31,25,.18)}
+  .what .tag{
+    flex:none;font-family:"Mochiy Pop One",sans-serif;font-size:12px;color:#fff;
+    padding:3px 10px;border-radius:999px;margin-top:2px;
+  }
+
+  /* articles placeholder */
+  .soon{
+    text-align:center;color:#8a7f6c;font-size:15px;padding:14px 0;
+  }
+  .soon .big{
+    font-family:"Mochiy Pop One",sans-serif;font-size:17px;color:var(--ink);
+    display:block;margin-bottom:6px;
+  }
+
+  /* profile */
+  .prof p{font-size:15px;color:#4a4236}
+  .prof p+p{margin-top:12px}
+
+  footer{
+    margin-top:50px;text-align:center;font-size:12.5px;color:#8a7f6c;line-height:1.9;
+  }
+  footer .mk{font-family:"Mochiy Pop One",sans-serif;font-size:15px;color:var(--ink)}
+
+  @media(max-width:480px){
+    .banner{box-shadow:4px 4px 0 var(--ink)}
+    .avatar{width:84px;height:84px}
+    .avatar-row{margin-top:-34px}
+  }
+  @media(prefers-reduced-motion:reduce){.btn{transition:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="hero">
+    <img class="banner" src="xheader.png" alt="ソファでくつろぎ、AIに作業をやらせるAIズボラマン">
+    <div class="avatar-row">
+      <img class="avatar" src="aicon.png" alt="AIズボラマンのアイコン">
+      <div class="id">
+        <h1>AIズボラマン</h1>
+        <div class="handle">面倒くさがりの効率オタク</div>
+      </div>
+    </div>
+  </div>
+
+  <p class="tagline">
+    <span class="hl">努力しない、頑張らない、無理しない。</span><br>
+    面倒なことは、全部AIにやらせればいい。
+  </p>
+
+  <p class="bio">
+    ここは、<b>めんどくさいをAIで片付けて、ラクして結果を出す</b>ための場所。
+    調べる・書く・考える・整理する。やりたくないことは全部AIに丸投げして、空いた時間で生きていく。そのやり方を置いていく。
+  </p>
+
+  <div class="cta-zone">
+    <a class="btn btn-line" href="https://lin.ee/u2v9CW4">
+      <span class="ico">💬</span>
+      <span class="label"><span>LINEに登録して特典を受け取る</span><span class="sub">「丸投げプロンプト30個」が今すぐ届く</span></span>
+    </a>
+  </div>
+
+  <section>
+    <div class="sec-head"><span class="bar" style="background:var(--mustard)"></span>登録するともらえるもの</div>
+    <div class="panel gift">
+      <div class="gift-top">
+        <span class="gift-ico">🎁</span>
+        <div>
+          <div class="gift-title">丸投げプロンプト30個</div>
+          <div class="gift-note">面倒な作業を全部AIにやらせる、コピペで使える指示文。</div>
+        </div>
+      </div>
+      <ul class="gift-list">
+        <li>長文メールを3行に要約</li>
+        <li>献立を1週間分まるごと決める</li>
+        <li>文章の下書きを一発生成</li>
+        <li>調べ物を箇条書きで整理</li>
+        <li>ほか、仕事・生活・お金まで全5カテゴリ</li>
+      </ul>
+      <a class="btn btn-line gift-cta" href="https://lin.ee/u2v9CW4">
+        <span class="ico">💬</span>
+        <span class="label"><span>LINE登録で受け取る</span></span>
+      </a>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="bar" style="background:var(--blue)"></span>ここで配ってるもの</div>
+    <div class="panel">
+      <ul class="what">
+        <li><span class="tag" style="background:var(--blue)">AI</span><span>面倒な作業をAIに丸投げする実用テク。コピペで使えるプロンプトやツールの使い方。</span></li>
+        <li><span class="tag" style="background:var(--mustard)">副業</span><span>AIを使って、楽して稼ぐための仕組みづくり。手間をかけずに収益を増やす方法。</span></li>
+        <li><span class="tag" style="background:var(--green)">効率化</span><span>仕事も生活も、コスパの悪い世間のやり方を捨てて最短で終わらせる工夫。</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="bar" style="background:var(--purple)"></span>レビュー・記事</div>
+    <div class="panel">
+      <div class="soon">
+        <span class="big">準備中</span>
+        AIツールのレビューや使い方を、ここに置いていく。
+      </div>
+    </div>
+  </section>
+
+  <section class="prof">
+    <div class="sec-head"><span class="bar" style="background:var(--red)"></span>中の人</div>
+    <div class="panel">
+      <p>有能だが、あえて手を抜く効率オタク。</p>
+      <p>敵は、コスパの悪い世間の常識。「みんなやってるから」で続いてる非効率を、片っ端から捨てていく。</p>
+      <p>頑張ることが偉い、とは思わない。ラクして結果が出るなら、その方がいい。</p>
+    </div>
+  </section>
+
+  <footer>
+    <div class="mk">AIズボラマン</div>
+    面倒くさいは、AIにやらせろ。
+  </footer>
+
+</div>
+</body>
+</html>
